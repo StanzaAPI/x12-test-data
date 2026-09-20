@@ -1,0 +1,25 @@
+name: ci
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm run ci
+      - name: Validate manifests
+        run: |
+          node -e "
+          const fs = require('fs');
+          const cases = JSON.parse(fs.readFileSync('.ci-out/adversarial/manifest.json', 'utf8'));
+          const valid = JSON.parse(fs.readFileSync('.ci-out/valid/manifest.json', 'utf8'));
+          if (cases.length < 30) throw new Error('expected at least 30 adversarial cases, got ' + cases.length);
+          if (valid.transactions !== 5000) throw new Error('expected 5000 valid transactions');
+          console.log('adversarial cases:', cases.length, 'valid transactions:', valid.transactions);
+          "

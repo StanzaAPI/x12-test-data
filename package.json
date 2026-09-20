@@ -1,0 +1,15 @@
+{
+  "name": "x12-test-data",
+  "version": "0.1.0",
+  "private": false,
+  "type": "module",
+  "description": "Deterministic, synthetic ANSI X12 test-data suite: valid corpora at scale plus adversarial cases",
+  "license": "MIT",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "generate": "node bin/generate.mjs",
+    "ci": "node bin/generate.mjs --profile valid --out .ci-out --transactions 5000 --claims 5 --seed 7 && node bin/generate.mjs --profile adversarial --out .ci-out --seed 7 && node bin/generate.mjs --profile mixed --out .ci-out --transactions 500 --claims 4 --seed 7"
+  }
+}
