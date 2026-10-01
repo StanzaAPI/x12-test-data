@@ -1,5 +1,7 @@
 # X12 Test Data
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23076203.svg)](https://doi.org/10.5281/zenodo.23076203)
+
 Deterministic, synthetic ANSI X12 test data for parser and pipeline testing:
 
 - **Valid corpora at scale** (837P, 835, 271) for end-to-end runs. Configure
